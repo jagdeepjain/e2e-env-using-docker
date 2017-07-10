@@ -16,7 +16,7 @@ It will do the following:
 2. mvn verify
 3. mvn package
 4. build docker image
-5. docker run -d -p 8080:8080 jagdeepjain/jetty-container:1
+5. docker run -d -p 7000:7000 jagdeepjain/jetty-container:1
 6. mvn test
 7. push jetty-container image to docker hub
 
