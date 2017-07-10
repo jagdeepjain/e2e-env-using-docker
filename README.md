@@ -1,2 +1,3 @@
-# test-automation-docker
-This project shows how to use docker for testing requirements
+# End to End developement Environment on Docker
+This project shows how to use docker for devlopement and testing requirements
+
