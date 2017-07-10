@@ -1,41 +1,41 @@
 #!/bin/bash
 _success=0
 #pull latest code
-#git pull origin master
-
+git pull origin master
 #build the project
- mvn verify -Dmaven.test.skip=true
- mvn package -Dmaven.test.skip=true
+mvn verify -Dmaven.test.skip=true
+mvn package -Dmaven.test.skip=true
+
 #build the docker image
 if [ "$?" -eq  $_success ]; then
-    echo "Maven build successful!.. start build docker Image...";
-    docker build -t jetty:1 . ;
+    echo "start build docker image...";
+    docker build -t jagdeepjain/jetty-container:1 . ;
 else
-   echo "Maven build fail..";
+   echo "maven build failed...";
    exit 1
 fi
 
 if [ $? ==  $_success ]; then
     echo "Start running docker container..."
-    docker run -d -p 8080:8080 jetty:3
+    docker run -d -p 7000:7000 jagdeepjain/jetty-container:1
 else
-   echo "Building docker container fail.."W
+   echo "building docker container failed..."
    exit 1
 fi
 
 if [ $? == $_success ]; then
-    echo "Start executing test cases"
+    echo "start executing test cases..."
     mvn test
 else
-  echo "Docker container running failing"
+  echo "something went wrong..."
   exit 1
 fi 
 echo "$?"
 
 if [ $? == $_success ]; then
-    echo "pushing into docker hub"
+    echo "pushing image to docker hub..."
 
 else
-   echo "Test execution fail"
+   echo "test execution failed..."
    exit 1
 fi
